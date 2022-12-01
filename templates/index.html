@@ -1,0 +1,67 @@
+{% extends "base.html" %} {% block start %}
+<section>
+  <div class="container my-3">
+    <h5>Add Your Tasks</h5>
+    <form action="/add" method="POST" id="myForm">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" required />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</section>
+<section>
+  {% if all_tasks | length == 0 %}
+
+  <div class="container alert alert-danger" role="alert">No Task Found :(</div>
+
+  {% else %}
+
+  <div class="container my-3 mt-5">
+    <h2>Your tasks</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">SNo.</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Created At</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in all_tasks %}
+        <tr>
+          <th scope="row">{{loop.index}}</th>
+          <td>{{task.title}}</td>
+          <td>{{task.desc}}</td>
+          <td>{{task.date_created.strftime("%m/%d/%Y")}}</td>
+          <td>
+            <a
+              href="/update/{{task.id}}"
+              type="button"
+              class="btn btn-info btn-sm mx-2"
+              >Update</a
+            >
+
+            <a
+              href="/delete/{{task.id}}"
+              type="button"
+              class="btn btn-warning btn-sm mx-2"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

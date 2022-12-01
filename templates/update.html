@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block start %}
+<section>
+  <div class="container my-3">
+    <h5>Update Your Task</h5>
+    <form method="POST" action="/update/{{task.id}}">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          value="{{task.title}}"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          value="{{task.desc}}"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
